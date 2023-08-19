@@ -11,12 +11,12 @@ import Seo from '@/components/Seo';
 export default function ApiTesterPage() {
   return (
     <Layout>
-      <Seo templateTitle='ApiTester' />
+      <Seo templateTitle='API Tester' />
 
       <main>
         <section className=''>
           <div className='layout min-h-screen py-20'>
-            <h1>Api Tester</h1>
+            <h1>API Tester</h1>
 
             <GetProductsTester />
             <GetSingleProductTester />
