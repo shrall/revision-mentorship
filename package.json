@@ -17,6 +17,9 @@
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "prepare": "husky install"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "5.1.1",
     "clsx": "^1.2.1",
@@ -25,7 +28,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
-    "tailwind-merge": "^1.13.2"
+    "tailwind-merge": "^1.13.2",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.3.0",
