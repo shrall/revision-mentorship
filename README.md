@@ -2,6 +2,16 @@
 
 Built as a template for mentoring
 
+## Getting Started
+
+1. Fork this repository
+2. Clone your forked repository
+3. Run `yarn`
+4. Duplicate `.env.example` and rename it to `.env`
+5. Run `npx prisma migrate reset`, then press `y` to reset database
+6. Run `yarn dev`
+7. You can also run `npx prisma studio` to view the database
+
 ## Brief
 
 Create a product site based on the API provided in `/api-tester`
