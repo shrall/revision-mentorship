@@ -1,12 +1,22 @@
-import { BookMarked } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { Loader2, Plus } from 'lucide-react';
 import * as React from 'react';
 
 import Layout from '@/components/layout/Layout';
-import ArrowLink from '@/components/links/ArrowLink';
-import PrimaryLink from '@/components/links/PrimaryLink';
+import ProductCard from '@/components/product/ProductCard';
 import Seo from '@/components/Seo';
 
+import { Product } from '@/schema/product';
+import api from '@/services/api';
+
 export default function HomePage() {
+  const { data: products, isLoading } = useQuery<{ data: Product[] }>(
+    ['products'],
+    {
+      queryFn: async () => api.get('/api/product').then((res) => res.data),
+    }
+  );
+
   return (
     <Layout>
       {/* <Seo templateTitle='Home' /> */}
@@ -14,15 +24,35 @@ export default function HomePage() {
 
       <main>
         <section className='bg-white'>
-          <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
-            <BookMarked size={48} />
-            <h1 className='mt-4'>Revision-Style Mentorship</h1>
-            <p className='mt-2 text-gray-500'>
-              A template for revision-style mentorship by Theodorus Clarence
-            </p>
-            <ArrowLink as={PrimaryLink} className='mt-2' href='/api-tester'>
-              /api-tester
-            </ArrowLink>
+          <div className='bg-white'>
+            <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8'>
+              <div className='md:flex md:items-center md:justify-between'>
+                <h2 className='text-2xl font-bold tracking-tight text-gray-900'>
+                  Trending products
+                </h2>
+                <a
+                  href='#'
+                  className='hidden items-center text-sm font-medium text-indigo-600 hover:text-indigo-500 md:flex'
+                >
+                  Add new product
+                  <Plus size={16} className='ml-1' />
+                </a>
+              </div>
+
+              {isLoading ?? (
+                <div className='flex h-[70vh] w-full items-center justify-center'>
+                  <div className='flex animate-pulse items-center transition-all'>
+                    Loading <Loader2 size={24} className='ml-1 animate-spin' />
+                  </div>
+                </div>
+              )}
+
+              <div className='mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8'>
+                {products?.data.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       </main>
