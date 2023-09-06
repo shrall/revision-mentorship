@@ -6,12 +6,14 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <div key={product.id} className='group relative'>
       <div className='h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80'>
-        <Image
-          src={product.image as string}
-          alt={product.title}
-          layout='fill'
-          objectFit='cover'
-        />
+        {product.image && (
+          <Image
+            src={product.image as string}
+            alt={product.title}
+            layout='fill'
+            objectFit='cover'
+          />
+        )}
       </div>
       <h3 className='mt-4 text-sm text-gray-700'>
         <a href='#'>
