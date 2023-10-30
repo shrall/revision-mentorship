@@ -30,8 +30,9 @@
     "next": "^13.4.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.10.1",
-    "sonner": "^0.7.0",
+    "react-hook-form": "^7.47.0",
+    "react-icons": "^4.11.0",
+    "sonner": "^1.0.3",
     "tailwind-merge": "^1.13.2",
     "zod": "^3.22.2"
   },

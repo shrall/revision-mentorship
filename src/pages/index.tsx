@@ -1,4 +1,5 @@
 import { Loader2, Plus } from 'lucide-react';
+import Link from 'next/link';
 import * as React from 'react';
 
 import useGetAllProducts from '@/hooks/Product/useGetAllProducts';
@@ -23,13 +24,13 @@ export default function HomePage() {
                 <h2 className='text-2xl font-bold tracking-tight text-gray-900'>
                   Trending products
                 </h2>
-                <a
-                  href='#'
+                <Link
+                  href='/product/create'
                   className='hidden items-center text-sm font-medium text-indigo-600 hover:text-indigo-500 md:flex'
                 >
                   Add new product
                   <Plus size={16} className='ml-1' />
-                </a>
+                </Link>
               </div>
 
               {isLoading && (
