@@ -4,11 +4,11 @@ import { Product } from '@/schema/product';
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div key={product.id} className='group relative'>
+    <div className='group relative'>
       <div className='h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80'>
         {product.image && (
           <Image
-            src={product.image as string}
+            src={product.image}
             alt={product.title}
             layout='fill'
             objectFit='cover'

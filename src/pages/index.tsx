@@ -1,21 +1,14 @@
-import { useQuery } from '@tanstack/react-query';
 import { Loader2, Plus } from 'lucide-react';
 import * as React from 'react';
+
+import useGetAllProducts from '@/hooks/Product/useGetAllProducts';
 
 import Layout from '@/components/layout/Layout';
 import ProductCard from '@/components/product/ProductCard';
 import Seo from '@/components/Seo';
 
-import { Product } from '@/schema/product';
-import api from '@/services/api';
-
 export default function HomePage() {
-  const { data: products, isLoading } = useQuery<{ data: Product[] }>(
-    ['products'],
-    {
-      queryFn: async () => api.get('/api/product').then((res) => res.data),
-    }
-  );
+  const { data: products, isLoading } = useGetAllProducts();
 
   return (
     <Layout>
@@ -39,7 +32,7 @@ export default function HomePage() {
                 </a>
               </div>
 
-              {isLoading ?? (
+              {isLoading && (
                 <div className='flex h-[70vh] w-full items-center justify-center'>
                   <div className='flex animate-pulse items-center transition-all'>
                     Loading <Loader2 size={24} className='ml-1 animate-spin' />
