@@ -1,6 +1,8 @@
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { CgSpinner } from 'react-icons/cg';
+import { toast } from 'sonner';
 
 import useCreateProduct from '@/hooks/product/useCreateProduct';
 
@@ -8,13 +10,31 @@ import { Product } from '@/schema/product';
 import { REGEX } from '@/utils/regex';
 
 function CreateProductPage() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Product>();
 
-  const { onSubmit, isLoading } = useCreateProduct();
+  const { mutateAsync: createProductMutation, isLoading } = useCreateProduct();
+
+  function onSubmit(data: Product) {
+    const product = {
+      ...data,
+      price: Number(data.price),
+    };
+    toast.promise(createProductMutation(product), {
+      loading: 'Creating new product...',
+      success: (data) => {
+        router.push('/');
+        return `Successfully added new product | ${data.title}`;
+      },
+      error: (err) => {
+        return `Failed to add new product | ${err.message}`;
+      },
+    });
+  }
 
   return (
     <div className='mx-auto max-w-lg px-4'>

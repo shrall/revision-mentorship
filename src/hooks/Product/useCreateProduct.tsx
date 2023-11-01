@@ -1,35 +1,20 @@
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
-import { toast } from 'sonner';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 
 import { Product } from '@/schema/product';
 import api from '@/services/api';
 
-function useCreateProduct() {
-  const router = useRouter();
-  const { mutateAsync: createProductMutation, isLoading } = useMutation({
-    mutationFn: (product: Product) => {
-      return api.post(`/api/product`, product);
-    },
-  });
+interface UseCreateProductProps {
+  options?: UseMutationOptions<Product, unknown, Product, unknown>;
+}
 
-  const onSubmit = (data: Product) => {
-    const product = {
-      ...data,
-      price: Number(data.price),
-    };
-    toast.promise(createProductMutation(product), {
-      loading: 'Creating new product...',
-      success: (data) => {
-        router.push('/');
-        return `Successfully added new product | ${data.data.title}`;
-      },
-      error: (err) => {
-        return `Failed to add new product | ${err.message}`;
-      },
-    });
-  };
-  return { onSubmit, isLoading };
+function useCreateProduct({ options }: UseCreateProductProps = {}) {
+  return useMutation({
+    mutationFn: async (product) => {
+      const res = await api.post(`/api/product`, product);
+      return res.data.data;
+    },
+    ...options,
+  });
 }
 
 export default useCreateProduct;

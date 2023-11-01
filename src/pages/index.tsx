@@ -2,7 +2,7 @@ import { Loader2, Plus } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
 
-import useGetAllProducts from '@/hooks/Product/useGetAllProducts';
+import useGetAllProducts from '@/hooks/product/useGetAllProducts';
 
 import Layout from '@/components/layout/Layout';
 import ProductCard from '@/components/product/ProductCard';
