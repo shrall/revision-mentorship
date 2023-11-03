@@ -10,8 +10,9 @@ import '@/styles/globals.css';
  * ? `Layout` component is called in every page using `np` snippets. If you have consistent layout across all page, you can add it here too
  */
 
+const queryClient = new QueryClient();
+
 function MyApp({ Component, pageProps }: AppProps) {
-  const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster richColors position='top-center' />
