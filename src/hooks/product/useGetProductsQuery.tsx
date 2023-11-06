@@ -1,13 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
+import { QueryKey, useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 import { Product } from '@/schema/product';
 import api from '@/services/api';
 
-function useGetProductsQuery() {
-  const result = useQuery(['products'], {
-    queryFn: () =>
-      api.get<{ data: Product[] }>('/api/product').then((res) => res.data),
-  });
+type UseGetProductsProps = {
+  options?: UseQueryOptions<Product[], unknown, Product[], QueryKey>;
+};
+
+function useGetProductsQuery({ options }: UseGetProductsProps = {}) {
+  const result = useQuery<Product[], unknown, Product[], QueryKey>(
+    ['products'],
+    {
+      queryFn: async () => {
+        const res = await api.get<{ data: Product[] }>(`/api/product`);
+        return res.data.data;
+      },
+      ...options,
+    }
+  );
 
   return result;
 }
