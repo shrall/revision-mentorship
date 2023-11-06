@@ -1,10 +1,21 @@
 import Image from 'next/image';
+import * as React from 'react';
+
+import { cn } from '@/lib/utils';
 
 import { Product } from '@/schema/product';
 
-export default function ProductCard({ product }: { product: Product }) {
+type ProductCardProps = {
+  product: Product;
+} & React.ComponentPropsWithoutRef<'div'>;
+
+export default function ProductCard({
+  product,
+  className,
+  ...rest
+}: ProductCardProps) {
   return (
-    <div className='group relative'>
+    <div className={cn('group relative', className)} {...rest}>
       <div className='h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80'>
         {product.image && (
           <Image
