@@ -2,14 +2,14 @@ import { Loader2, Plus } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
 
-import useGetAllProducts from '@/hooks/product/useGetAllProducts';
+import useGetProductsQuery from '@/hooks/product/useGetProductsQuery';
 
 import Layout from '@/components/layout/Layout';
 import ProductCard from '@/components/product/ProductCard';
 import Seo from '@/components/Seo';
 
 export default function HomePage() {
-  const { data: products, isLoading } = useGetAllProducts();
+  const { data: products, isLoading } = useGetProductsQuery();
 
   return (
     <Layout>

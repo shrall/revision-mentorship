@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { CgSpinner } from 'react-icons/cg';
 import { toast } from 'sonner';
 
-import useCreateProduct from '@/hooks/product/useCreateProduct';
+import useCreateProductMutation from '@/hooks/product/useCreateProductMutation';
 
 import { Product } from '@/schema/product';
 import { REGEX } from '@/utils/regex';
@@ -17,7 +17,8 @@ function CreateProductPage() {
     formState: { errors },
   } = useForm<Product>();
 
-  const { mutateAsync: createProductMutation, isLoading } = useCreateProduct();
+  const { mutateAsync: createProductMutation, isLoading } =
+    useCreateProductMutation();
 
   function onSubmit(data: Product) {
     const product = {
